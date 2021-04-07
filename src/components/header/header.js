@@ -39,10 +39,10 @@ const Header = () => {
                     <a href="#">Characters</a>
                 </li>
                 <li>
-                    <a href="#">Houses</a>
+                    <a href="#">Episodes</a>
                 </li>
                 <li>
-                    <a href="#">Books</a>   
+                    <a href="#">Quotes</a>   
                 </li>
             </HeaderLinks>
         </HeaderBlock>

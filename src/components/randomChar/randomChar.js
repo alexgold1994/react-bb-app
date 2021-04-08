@@ -34,31 +34,21 @@ export default class RandomChar extends Component {
     bbService = new bbService();
 
     state = {
-        name: null,
-        img: null,
-        birthday: null,
-        nickname: null,
-        status: null,
-        occupation: null
+     char: {}
+    }
+
+    onCharLoaded = (char) => {
+        this.setState({ char })
     }
 
     updateChar() {
-        const id = 1;
+        const id = Math.floor(Math.random()*50 + 1);
         this.bbService.getCharacter(id)
-            .then((char) => {
-                this.setState({
-                    name: char[0].name,
-                    birthday: char[0].birthday,
-                    nickname: char[0].nickname,
-                    status: char[0].status,
-                    occupation: char[0].occupation,
-                    img: char[0].img
-                })
-            })
+            .then(this.onCharLoaded);
     }
 
     render() {
-        const {name, img, birthday, nickname, status, occupation} = this.state;
+        const { char: {name, img, birthday, nickname, status, occupation}} = this.state;
 
         return ( 
             
@@ -66,7 +56,7 @@ export default class RandomChar extends Component {
                 <h4>Random Character: {name} </h4>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item d-flex justify-content-between">
-                        <CharImg src={img} alt="char img" height="100px"/>
+                        <CharImg src={img} alt="char img"/>
                     </li>
                     <li className="list-group-item d-flex justify-content-between">
                         <Term>Birthday</Term>

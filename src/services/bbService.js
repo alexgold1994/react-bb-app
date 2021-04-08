@@ -21,13 +21,14 @@ export default class bbService {
         return this.getResource(`/books/${episode_id}/`);
     }
     
-    getAllCharacters() {
-        return this.getResource(`/characters`);
+    async getAllCharacters() {
+        const res = await this.getResource(`/characters`);
+        return res.map(this._transformCharacter)
     }
     
-    getCharacter = async (char_id) => {
-        const res = await this.getResource(`/characters/${char_id}`);
-        return res;
+    async getCharacter(char_id) {
+        const character = await this.getResource(`/characters/${char_id}`);
+        return this._transformCharacter(character);
     }
     
     getAllQuotes() {
@@ -36,5 +37,16 @@ export default class bbService {
     
     getgetAllQuote(quote_id) {
         return this.getResource(`/quotes/${quote_id}/`);
+    }
+
+    _transformCharacter(char) {
+        return {
+            name: char[0].name,
+            birthday: char[0].birthday,
+            nickname: char[0].nickname,
+            status: char[0].status,
+            occupation: char[0].occupation,
+            img: char[0].img
+        }
     }
 }

@@ -1,4 +1,4 @@
-export default class BbService {
+export default class bbService {
     constructor() {
         this._apiBase = 'https://www.breakingbadapi.com/api';
     }
@@ -25,8 +25,9 @@ export default class BbService {
         return this.getResource(`/characters`);
     }
     
-    getCharacter (char_id) {
-        return this.getResource(`/characters/${char_id}`);
+    getCharacter = async (char_id) => {
+        const res = await this.getResource(`/characters/${char_id}`);
+        return res;
     }
     
     getAllQuotes() {

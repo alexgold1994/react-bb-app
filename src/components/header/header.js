@@ -9,9 +9,16 @@ const HeaderBlock = styled.div`
 `;
 
 const HeaderTitle = styled.h3`
-    font-size: 24px;
-    color: #fff;
-    margin: 0 auto;
+    font-size: 30px;
+    color: ;
+    margin: 0;
+    color: white;
+    text-shadow:
+        3px  3px 0 #000,
+       -1px -1px 0 #000,  
+        1px -1px 0 #000,
+       -1px  1px 0 #000,
+        1px  1px 0 #000;
 `;
 
 const HeaderLinks = styled.ul`
@@ -23,6 +30,9 @@ const HeaderLinks = styled.ul`
     li {
         margin-right: 20px;
         font-size: 18px;
+        &:hover {
+            color: yellow;
+        }     
     }
 `;
 
@@ -31,7 +41,7 @@ const Header = () => {
         <HeaderBlock>
             <HeaderTitle>
                 <a href="#">
-                Breaking bad DB
+                Breaking Bad DB
                 </a>
             </HeaderTitle>
             <HeaderLinks>

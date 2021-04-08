@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import bbService from '../../services/bbService';
+import { Spinner } from 'reactstrap';
 
 const RandomBlock = styled.div`
     background-color: #fff;
@@ -24,6 +25,11 @@ const CharImg = styled.img`
     weight: 100px
 `
 
+const StyledSpinner = styled(Spinner)`
+    margin: 0 45%
+    
+`
+
 export default class RandomChar extends Component {
 
     constructor() {
@@ -34,11 +40,15 @@ export default class RandomChar extends Component {
     bbService = new bbService();
 
     state = {
-     char: {}
+     char: {},
+     loading: true
     }
 
     onCharLoaded = (char) => {
-        this.setState({ char })
+        this.setState({ 
+            char,
+            loading: false
+        })
     }
 
     updateChar() {
@@ -48,7 +58,11 @@ export default class RandomChar extends Component {
     }
 
     render() {
-        const { char: {name, img, birthday, nickname, status, occupation}} = this.state;
+        const { char: {name, img, birthday, nickname, status, occupation}, loading } = this.state;
+
+        if (loading) {
+            return <StyledSpinner color="warning" style={{ width: '6rem', height: '6rem' }} />
+        }
 
         return ( 
             

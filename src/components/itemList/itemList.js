@@ -1,20 +1,27 @@
 import React, {Component} from 'react';
-import './itemList.css';
+import { ListGroup, ListGroupItem } from 'reactstrap';
+import styled from 'styled-components';
+
+const ListGroupItemOne = styled(ListGroupItem)`
+    cursor: pointer;
+`;
+
+
 export default class ItemList extends Component {
 
     render() {
         return (
-            <ul className="item-list list-group">
-                <li className="list-group-item">
+            <ListGroup>
+                <ListGroupItemOne>
                     Walter White
-                </li>
-                <li className="list-group-item">
+                </ListGroupItemOne>
+                <ListGroupItemOne>
                     Jesse Pinkman
-                </li>
-                <li className="list-group-item">
+                </ListGroupItemOne>
+                <ListGroupItemOne>
                     Saul Goodman
-                </li>
-            </ul>
+                </ListGroupItemOne>
+            </ListGroup>
         );
     }
 }

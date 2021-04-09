@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import bbService from '../../services/bbService';
 import { Spinner } from 'reactstrap';
+import ErrorMessage from '../errorMessage/errorMessage';
 
 const RandomBlock = styled.div`
     background-color: #fff;
@@ -26,7 +27,7 @@ const CharImg = styled.img`
 `
 
 const StyledSpinner = styled(Spinner)`
-    margin: 30%;
+    margin: 30% ;
             
 `
 
@@ -47,6 +48,14 @@ export default class RandomChar extends Component {
     onCharLoaded = (char) => {
         this.setState({ 
             char,
+            loading: false,
+            error: false
+        })
+    }
+
+    onError = (err) => {
+        this.setState({
+            error: true,
             loading: false
         })
     }
@@ -54,19 +63,23 @@ export default class RandomChar extends Component {
     updateChar() {
         const id = Math.floor(Math.random()*50 + 1);
         this.bbService.getCharacter(id)
-            .then(this.onCharLoaded);
+            .then(this.onCharLoaded)
+            .catch(this.onError);
     }
 
     render() {
-        const { char , loading } = this.state;
+        const { char , loading , error} = this.state;
 
-        const content = loading ?
-        <StyledSpinner color="warning" style={{ width: '10rem', height: '10rem' }} /> :
-        <View char={char}/>;
-       // const content = !loading ? <View char={char}/> : null;
+        const errorMessage = error ? <ErrorMessage/> : null;
+        const spinner = loading ? <StyledSpinner color="warning" style={{ width: '10rem', height: '10rem' }} /> : null; 
+        const content = !(loading || error) ? <View char={char}/> : null;
+
+            ;
 
         return (             
             <RandomBlock>
+            {errorMessage}
+            {spinner}
             {content}
             </RandomBlock>
         );

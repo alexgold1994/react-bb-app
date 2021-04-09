@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import bbService from '../../services/bbService';
-import { Spinner } from 'reactstrap';
 import ErrorMessage from '../errorMessage/errorMessage';
+import StyledSpinner from '../spinner/spinner'
 
 const RandomBlock = styled.div`
     background-color: #fff;
@@ -26,10 +26,7 @@ const CharImg = styled.img`
     height: 150px;    
 `
 
-const StyledSpinner = styled(Spinner)`
-    margin: 30% ;
-            
-`
+
 
 export default class RandomChar extends Component {
 
@@ -41,7 +38,7 @@ export default class RandomChar extends Component {
 
     componentDidMount() {
         this.updateChar();
-        this.timerId = setInterval(this.updateChar, 2000);
+        this.timerId = setInterval(this.updateChar, 552000);
     }
 
     componentWillUnmount() {
@@ -64,7 +61,6 @@ export default class RandomChar extends Component {
     }
 
     updateChar = () => {
-        console.log('update');
         const id = Math.floor(Math.random()*50 + 1);
         this.bbService.getCharacter(id)
             .then(this.onCharLoaded)

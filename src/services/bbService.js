@@ -22,12 +22,12 @@ export default class bbService {
     }
     
     async getAllCharacters() {
-        const res = await this.getResource(`/characters`);
-        return res.map(this._transformCharacter)
+        const res = await this.getResource(`/characters?limit=10`);
+        return res.map(this._transformCharacters)
     }
     
-    async getCharacter(char_id) {
-        const character = await this.getResource(`/characters/${char_id}`);
+    async getCharacter(id) {
+        const character = await this.getResource(`/characters/${id}`);
         return this._transformCharacter(character);
     }
     
@@ -39,6 +39,16 @@ export default class bbService {
         return this.getResource(`/quotes/${quote_id}/`);
     }
 
+    _transformCharacters(char) {
+        return {
+            name: char.name,
+            birthday: char.birthday,
+            nickname: char.nickname,
+            status: char.status,
+            occupation: char.occupation,
+            img: char.img
+        }
+    }
     _transformCharacter(char) {
         return {
             name: char[0].name,

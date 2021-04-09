@@ -17,34 +17,40 @@ export default class ItemList extends Component {
         charList: null
     }
 
-/*     componentDidMount() {
+    componentDidMount() {
         this.bbService.getAllCharacters()
             .then((charList) => {
                 this.setState({
                     charList
                 })
             })
-    } */
+    }
+
+    renderItems(arr) {
+        return arr.map((item, i) => {
+            return (
+                <ListGroupItemOne
+                 key={i}>
+                    {item.name}
+                </ListGroupItemOne>
+            )
+        })
+    }
 
     render() {
 
         const {charList} = this.state;
 
+        
         if (!charList) {
             return <StyledSpinner/>
         }
 
+        const items = this.renderItems(charList)
+
         return (
             <ListGroup>
-                <ListGroupItemOne>
-                    Walter White
-                </ListGroupItemOne>
-                <ListGroupItemOne>
-                    Jesse Pinkman
-                </ListGroupItemOne>
-                <ListGroupItemOne>
-                    Saul Goodman
-                </ListGroupItemOne>
+                {items}
             </ListGroup>
         );
     }

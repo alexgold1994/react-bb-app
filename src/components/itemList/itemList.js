@@ -30,7 +30,8 @@ export default class ItemList extends Component {
         return arr.map((item, i) => {
             return (
                 <ListGroupItemOne
-                 key={i}>
+                 key={i}
+                 onClick={ () => this.props.onCharSelected(i)}>
                     {item.name}
                 </ListGroupItemOne>
             )

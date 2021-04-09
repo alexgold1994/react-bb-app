@@ -1,4 +1,5 @@
 import React from 'react';
+import img from './error.jpg';
 import styled from 'styled-components';
 
 const ImgError = styled.img`
@@ -9,7 +10,7 @@ const ImgError = styled.img`
 const ErrorMessage = () => {
     return (
     <>
-        <ImgError src={process.env.PUBLIC_URL + '/img/error.jpg'} alt="error"/>
+        <ImgError src={img} alt="error"/>
         <span> Something goes wrong !</span>
     </>
     )

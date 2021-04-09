@@ -26,8 +26,8 @@ const CharImg = styled.img`
 `
 
 const StyledSpinner = styled(Spinner)`
-    margin: 0 45%
-    
+    margin: 30%;
+            
 `
 
 export default class RandomChar extends Component {
@@ -58,39 +58,48 @@ export default class RandomChar extends Component {
     }
 
     render() {
-        const { char: {name, img, birthday, nickname, status, occupation}, loading } = this.state;
+        const { char , loading } = this.state;
 
-        if (loading) {
-            return <StyledSpinner color="warning" style={{ width: '6rem', height: '6rem' }} />
-        }
+        const content = loading ?
+        <StyledSpinner color="warning" style={{ width: '10rem', height: '10rem' }} /> :
+        <View char={char}/>;
+       // const content = !loading ? <View char={char}/> : null;
 
-        return ( 
-            
+        return (             
             <RandomBlock>
-                <h4>Random Character: {name} </h4>
-                <ul className="list-group list-group-flush">
-                    <li className="list-group-item d-flex justify-content-between">
-                        <CharImg src={img} alt="char img"/>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <Term>Birthday</Term>
-                        <span> {birthday} </span>
-                    </li>         
-                                         
-                    <li className="list-group-item d-flex justify-content-between">
-                        <Term>Nickname</Term>
-                        <span> {nickname} </span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <Term>Status</Term>
-                        <span> {status} </span>
-                    </li>
-                    <li className="list-group-item d-flex justify-content-between">
-                        <Term>occupation </Term>
-                        <span> {occupation} </span>
-                    </li>
-                </ul>
+            {content}
             </RandomBlock>
         );
     }
+}
+
+const View = ({char}) => {
+        const {name, img, birthday, nickname, status, occupation} = char;
+    return (
+        <>
+            <h4>Random Character: {name} </h4>
+            <ul className="list-group list-group-flush">
+                <li className="list-group-item d-flex justify-content-between">
+                    <CharImg src={img} alt="char img"/>
+                </li>
+                <li className="list-group-item d-flex justify-content-between">
+                    <Term>Birthday</Term>
+                    <span> {birthday} </span>
+                </li>         
+                                        
+                <li className="list-group-item d-flex justify-content-between">
+                    <Term>Nickname</Term>
+                    <span> {nickname} </span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between">
+                    <Term>Status</Term>
+                    <span> {status} </span>
+                </li>
+                <li className="list-group-item d-flex justify-content-between">
+                    <Term>occupation </Term>
+                    <span> {occupation} </span>
+                </li>
+            </ul>
+        </>
+    )
 }

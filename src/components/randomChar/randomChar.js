@@ -23,7 +23,7 @@ const Term = styled.span`
 const CharImg = styled.img`
     margin: 0 auto;
     height: 150px;
-    weight: 100px
+    width: auto;
 `
 
 const StyledSpinner = styled(Spinner)`

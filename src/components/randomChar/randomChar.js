@@ -9,6 +9,7 @@ const RandomBlock = styled.div`
     padding: 25px 25px 15px 25px;
     margin-bottom: 40px;
     border-radius: 1%;
+    min-height: 520px;
     h4 {
         margin-bottom: 20px;
         text-align: center;
@@ -22,8 +23,7 @@ const Term = styled.span`
 
 const CharImg = styled.img`
     margin: 0 auto;
-    height: 150px;
-    width: auto;
+    height: 150px;    
 `
 
 const StyledSpinner = styled(Spinner)`
@@ -33,16 +33,19 @@ const StyledSpinner = styled(Spinner)`
 
 export default class RandomChar extends Component {
 
-    constructor() {
-        super();
-        this.updateChar();
-    }
-
     bbService = new bbService();
-
     state = {
      char: {},
      loading: true
+    }
+
+    componentDidMount() {
+        this.updateChar();
+        this.timerId = setInterval(this.updateChar, 2000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerId);
     }
 
     onCharLoaded = (char) => {
@@ -60,7 +63,8 @@ export default class RandomChar extends Component {
         })
     }
 
-    updateChar() {
+    updateChar = () => {
+        console.log('update');
         const id = Math.floor(Math.random()*50 + 1);
         this.bbService.getCharacter(id)
             .then(this.onCharLoaded)
@@ -90,7 +94,7 @@ const View = ({char}) => {
         const {name, img, birthday, nickname, status, occupation} = char;
     return (
         <>
-            <h4>Random Character: {name} </h4>
+            <h4>Random Character: <br/> {name} </h4>
             <ul className="list-group list-group-flush">
                 <li className="list-group-item d-flex justify-content-between">
                     <CharImg src={img} alt="char img"/>

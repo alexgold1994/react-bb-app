@@ -49,6 +49,13 @@ export default class CharDetails extends Component {
         this.updateChar();
     }
 
+        //Проверка на совпадение с пред. пропсами.
+    componentDidUpdate(prevProps) {
+        if (this.props.charId !== prevProps.charId) {
+            this.updateChar();
+        }
+    }
+
     updateChar() {
         const {charId} = this.props;
         if (!charId) {

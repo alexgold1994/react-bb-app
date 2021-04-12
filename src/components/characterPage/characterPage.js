@@ -5,6 +5,19 @@ import CharDetails from '../charDetails';
 import ErrorMessage from '../errorMessage/errorMessage';
 import bbService from '../../services/bbService';
 
+const RowBlock = ({left, right}) => {
+    return (
+        <Row>
+            <Col md='6'>
+                {left}
+            </Col>
+            <Col md='6'>
+                {right}
+            </Col>
+        </Row>
+    )
+}
+
 export default class CharacterPage extends Component {
 
     bbService = new bbService();
@@ -43,14 +56,7 @@ export default class CharacterPage extends Component {
         )
 
         return (
-        <Row>
-            <Col md='6'>
-                {itemList}
-            </Col>
-            <Col md='6'>
-                {charDetails}
-            </Col>
-        </Row>
+            <RowBlock left={itemList} right={charDetails} />
         )
 
     }

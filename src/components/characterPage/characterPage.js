@@ -13,7 +13,7 @@ export default class CharacterPage extends Component {
         error: false
     }
 
-    onCharSelected = (id) => {
+    onItemSelected = (id) => {
         this.setState ({
             selectedChar: id
         })
@@ -32,7 +32,7 @@ export default class CharacterPage extends Component {
         
         const itemList = (
             <ItemList
-            onCharSelected={this.onCharSelected}
+            onItemSelected={this.onItemSelected}
             getData={this.bbService.getAllCharacters}
             renderItem={({name}) => `${name}`} />
         )

@@ -29,19 +29,26 @@ export default class CharacterPage extends Component {
         if(this.state.error) {
             return <ErrorMessage/>
         }
-    
+        
+        const itemList = (
+            <ItemList
+            onCharSelected={this.onCharSelected}
+            getData={this.bbService.getAllCharacters}
+            renderItem={({name}) => `${name}`} />
+        )
+
+        const charDetails = (
+            <CharDetails
+            charId={this.state.selectedChar} />
+        )
 
         return (
         <Row>
             <Col md='6'>
-                <ItemList
-                     onCharSelected={this.onCharSelected}
-                     getData={this.bbService.getAllCharacters}
-                     renderItem={(item) => item.name} />
+                {itemList}
             </Col>
             <Col md='6'>
-                <CharDetails
-                     charId={this.state.selectedChar} />
+                {charDetails}
             </Col>
         </Row>
         )

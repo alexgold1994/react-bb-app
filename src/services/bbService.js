@@ -14,12 +14,12 @@ export default class bbService {
     }
 
     getAllEpisodes = async () => {
-        const res = await this.getResource(`/episodes?limit=10`)
+        const res = await this.getResource(`/episodes`)
         return res.map(this._transformEpisodes);
     }
     
-    getEpisode = async (episode_id) => {
-        const episode = await this.getResource(`/books/${episode_id}/`)
+    getEpisode = async (id) => {
+        const episode = await this.getResource(`/episodes/${id}`)
         return this._transformEpisodes(episode);        
     }
     
@@ -34,12 +34,12 @@ export default class bbService {
     }
     
     getAllQuotes = async () => {
-        const res = await this.getResource(`/quotes/`);
+        const res = await this.getResource(`/quotes`);
         return res.map(this._transformQuotes);
     }
     
-    getQuote = async (quote_id) => {
-        const quote = await this.getResource(`/quotes/${quote_id}/`);
+    getQuote = async (id) => {
+        const quote = await this.getResource(`/quotes/${id}`);
         return this._transformQuotes(quote);
     }
 
@@ -66,7 +66,7 @@ export default class bbService {
 
     _transformEpisodes(ep) {
         return {
-            title: ep.title,
+            name: ep.title,
             season: ep.season,
             episode: ep.episode,
             air_date: ep.air_date,
@@ -77,7 +77,7 @@ export default class bbService {
 
     _transformQuotes(quotes) {
         return {
-            quote: quotes.quote,
+            name: quotes.quote,
             author: quotes.author,
             series: quotes.series
         }

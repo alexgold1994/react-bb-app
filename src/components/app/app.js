@@ -5,6 +5,9 @@ import Header from '../header';
 import RandomChar from '../randomChar';
 import ErrorMessage from '../errorMessage/errorMessage';
 import CharacterPage from '../characterPage/characterPage';
+import ItemList from '../itemList';
+import CharDetails from '../charDetails';
+import bbService from '../../services/bbService';
 
 const Btn = styled.button`
         padding: 12px;
@@ -23,6 +26,9 @@ const Btn = styled.button`
 
 
 export default class App extends Component {
+
+    bbService = new bbService();
+
     state = {
         showRandomChar: true,
         error: false
@@ -67,8 +73,29 @@ export default class App extends Component {
                         </Col>
                     </Row>
                     <CharacterPage/>
-                    <CharacterPage/>
-                    <CharacterPage/>
+                    <Row>
+                        <Col md='6'>
+                            <ItemList
+                                onCharSelected={this.onCharSelected}
+                                getData={this.bbService.getAllEpisodes} />
+                        </Col>
+                        <Col md='6'>
+                            <CharDetails
+                                charId={this.state.selectedChar} />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col md='6'>
+                            <ItemList
+                                onCharSelected={this.onCharSelected}
+                                getData={this.bbService.getAllQuotes} />
+                        </Col>
+                        <Col md='6'>
+                            <CharDetails
+                                charId={this.state.selectedChar} />
+                        </Col>
+                    </Row>
                 </Container>
             </>
         );

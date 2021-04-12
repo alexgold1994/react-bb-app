@@ -6,7 +6,7 @@ import ErrorMessage from '../errorMessage/errorMessage';
 import bbService from '../../services/bbService';
 
 export default class CharacterPage extends Component {
-    
+
     bbService = new bbService();
     state = {
         selectedChar: 10,
@@ -32,7 +32,7 @@ export default class CharacterPage extends Component {
     
 
         return (
-            <Row>
+        <Row>
             <Col md='6'>
                 <ItemList
                      onCharSelected={this.onCharSelected}

@@ -13,29 +13,29 @@ export default class bbService {
         return await res.json();
     }
 
-    getAllEpisodes() {
+    getAllEpisodes = () => {
         return this.getResource(`/episodes/`);
     }
     
-    getEpisode(episode_id) {
+    getEpisode = (episode_id) => {
         return this.getResource(`/books/${episode_id}/`);
     }
     
-    async getAllCharacters() {
+    getAllCharacters = async () => {
         const res = await this.getResource(`/characters?limit=10`);
         return res.map(this._transformCharacters)
     }
     
-    async getCharacter(id) {
+    getCharacter = async (id) => {
         const character = await this.getResource(`/characters/${id}`);
         return this._transformCharacter(character);
     }
     
-    getAllQuotes() {
+    getAllQuotes = () => {
         return this.getResource(`/quotes/`);
     }
     
-    getgetAllQuote(quote_id) {
+    getgetAllQuote = (quote_id) => {
         return this.getResource(`/quotes/${quote_id}/`);
     }
 

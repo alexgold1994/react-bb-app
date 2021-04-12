@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import styled from 'styled-components';
-import bbService from '../../services/bbService';
 import StyledSpinner from '../spinner/spinner'
 
 const ListGroupItemOne = styled(ListGroupItem)`
@@ -11,17 +10,17 @@ const ListGroupItemOne = styled(ListGroupItem)`
 
 export default class ItemList extends Component {
 
-    bbService = new bbService();
-
     state = {
-        charList: null
+        itemList: null
     }
 
     componentDidMount() {
-        this.bbService.getAllCharacters()
-            .then((charList) => {
+        const {getData} = this.props
+
+        getData()
+            .then((itemList) => {
                 this.setState({
-                    charList
+                    itemList
                 })
             })
     }
@@ -40,14 +39,14 @@ export default class ItemList extends Component {
 
     render() {
 
-        const {charList} = this.state;
+        const {itemList} = this.state;
 
         
-        if (!charList) {
+        if (!itemList) {
             return <StyledSpinner/>
         }
 
-        const items = this.renderItems(charList)
+        const items = this.renderItems(itemList)
 
         return (
             <ListGroup>

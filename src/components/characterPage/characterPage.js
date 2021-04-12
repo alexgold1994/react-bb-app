@@ -36,7 +36,8 @@ export default class CharacterPage extends Component {
             <Col md='6'>
                 <ItemList
                      onCharSelected={this.onCharSelected}
-                     getData={this.bbService.getAllCharacters} />
+                     getData={this.bbService.getAllCharacters}
+                     renderItem={(item) => item.name} />
             </Col>
             <Col md='6'>
                 <CharDetails

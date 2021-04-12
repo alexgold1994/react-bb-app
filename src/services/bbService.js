@@ -45,6 +45,7 @@ export default class bbService {
 
     _transformCharacters(char) {
         return {
+            id: char.char_id,
             name: char.name,
             birthday: char.birthday,
             nickname: char.nickname,
@@ -66,6 +67,7 @@ export default class bbService {
 
     _transformEpisodes(ep) {
         return {
+            id: ep.episode_id,
             name: ep.title,
             season: ep.season,
             episode: ep.episode,
@@ -77,6 +79,7 @@ export default class bbService {
 
     _transformQuotes(quotes) {
         return {
+            id: quotes.quote_id,
             name: quotes.quote,
             author: quotes.author,
             series: quotes.series

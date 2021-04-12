@@ -13,17 +13,19 @@ export default class bbService {
         return await res.json();
     }
 
-    getAllEpisodes = () => {
-        return this.getResource(`/episodes/`);
+    getAllEpisodes = async () => {
+        const res = await this.getResource(`/episodes?limit=10`)
+        return res.map(this._transformEpisodes);
     }
     
-    getEpisode = (episode_id) => {
-        return this.getResource(`/books/${episode_id}/`);
+    getEpisode = async (episode_id) => {
+        const episode = await this.getResource(`/books/${episode_id}/`)
+        return this._transformEpisodes(episode);        
     }
     
     getAllCharacters = async () => {
         const res = await this.getResource(`/characters?limit=10`);
-        return res.map(this._transformCharacters)
+        return res.map(this._transformCharacters);
     }
     
     getCharacter = async (id) => {
@@ -31,12 +33,14 @@ export default class bbService {
         return this._transformCharacter(character);
     }
     
-    getAllQuotes = () => {
-        return this.getResource(`/quotes/`);
+    getAllQuotes = async () => {
+        const res = await this.getResource(`/quotes/`);
+        return res.map(this._transformQuotes);
     }
     
-    getgetAllQuote = (quote_id) => {
-        return this.getResource(`/quotes/${quote_id}/`);
+    getQuote = async (quote_id) => {
+        const quote = await this.getResource(`/quotes/${quote_id}/`);
+        return this._transformQuotes(quote);
     }
 
     _transformCharacters(char) {
@@ -57,6 +61,25 @@ export default class bbService {
             status: char[0].status,
             occupation: char[0].occupation,
             img: char[0].img
+        }
+    }
+
+    _transformEpisodes(ep) {
+        return {
+            title: ep.title,
+            season: ep.season,
+            episode: ep.episode,
+            air_date: ep.air_date,
+            characters: ep.characters,
+            series: ep.series
+        }
+    }
+
+    _transformQuotes(quotes) {
+        return {
+            quote: quotes.quote,
+            author: quotes.author,
+            series: quotes.series
         }
     }
 }

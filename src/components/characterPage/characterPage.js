@@ -1,22 +1,9 @@
 import React, {Component} from 'react';
-import {Col, Row} from 'reactstrap';
 import ItemList from '../itemList';
 import CharDetails from '../charDetails';
 import ErrorMessage from '../errorMessage/errorMessage';
 import bbService from '../../services/bbService';
-
-const RowBlock = ({left, right}) => {
-    return (
-        <Row>
-            <Col md='6'>
-                {left}
-            </Col>
-            <Col md='6'>
-                {right}
-            </Col>
-        </Row>
-    )
-}
+import RowBlock from '../rowBlock/rowBlock';
 
 export default class CharacterPage extends Component {
 

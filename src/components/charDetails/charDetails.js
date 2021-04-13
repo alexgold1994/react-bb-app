@@ -38,7 +38,7 @@ const MessageSelect = styled.span`
 
 const Field = ({char, field, label}) => {
     return (
-        <li className="list-group-item d-flex justify-content-between">
+    <li className="list-group-item d-flex justify-content-between">
         <Term>{label}</Term>
         <span> {char[field]} </span>
     </li> 
@@ -84,12 +84,15 @@ export default class CharDetails extends Component {
             return <MessageSelect> Please select a character !</MessageSelect>
         }
         const {char} = this.state;
-        const {name} = char
+        const {name, img} = char
 
         return (
             <CharDetailsMain>
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
+                <li className="list-group-item d-flex justify-content-between">
+                    <CharImg src={img} alt="char img"/>
+                </li>
                     {
                         React.Children.map(this.props.children, (child) => {
                             return React.cloneElement(child, {char})

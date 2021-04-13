@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ItemList from '../itemList';
-import CharDetails from '../charDetails';
+import CharDetails, {Field} from '../charDetails/charDetails';
 import ErrorMessage from '../errorMessage/errorMessage';
 import bbService from '../../services/bbService';
 import RowBlock from '../rowBlock/rowBlock';
@@ -38,8 +38,11 @@ export default class CharacterPage extends Component {
         )
 
         const charDetails = (
-            <CharDetails
-            charId={this.state.selectedChar} />
+            <CharDetails charId={this.state.selectedChar}>
+                <Field field='occupation' label='Occupation'/>
+                <Field field='birthday' label='Born'/>
+            </CharDetails>
+
         )
 
         return (

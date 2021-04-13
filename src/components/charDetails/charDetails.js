@@ -36,6 +36,16 @@ const MessageSelect = styled.span`
     font-size: 30px;
 `;
 
+const Field = ({char, field, label}) => {
+    return (
+        <li className="list-group-item d-flex justify-content-between">
+        <Term>{label}</Term>
+        <span> {char[field]} </span>
+    </li> 
+    )
+}
+
+export {Field}
 
 export default class CharDetails extends Component {
 
@@ -73,34 +83,19 @@ export default class CharDetails extends Component {
         if (!this.state.char) {
             return <MessageSelect> Please select a character !</MessageSelect>
         }
-
-        const {name, img, birthday, nickname, status, occupation } = this.state.char
+        const {char} = this.state;
+        const {name} = char
 
         return (
             <CharDetailsMain>
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
-                <li className="list-group-item d-flex justify-content-between">
-                    <CharImg src={img} alt="char img"/>
-                </li>
-                <li className="list-group-item d-flex justify-content-between">
-                    <Term>Birthday</Term>
-                    <span> {birthday} </span>
-                </li>         
-                                        
-                <li className="list-group-item d-flex justify-content-between">
-                    <Term>Nickname</Term>
-                    <span> {nickname} </span>
-                </li>
-                <li className="list-group-item d-flex justify-content-between">
-                    <Term>Status</Term>
-                    <span> {status} </span>
-                </li>
-                <li className="list-group-item d-flex justify-content-between">
-                    <Term>occupation </Term>
-                    <span> {occupation} </span>
-                </li>
-            </ul>
+                    {
+                        React.Children.map(this.props.children, (child) => {
+                            return React.cloneElement(child, {char})
+                        })
+                    }                   
+                </ul>
             </CharDetailsMain>
         );
     }
